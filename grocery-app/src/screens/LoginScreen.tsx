@@ -1,6 +1,18 @@
+
 import React, { useState } from 'react';
-import { Text, TextInput, StyleSheet, Alert } from 'react-native';
-import { Page, Heading, PrimaryButton, COLORS } from '../components/ShopUI';
+import {
+  Text,
+  TextInput,
+  Alert,
+  StyleSheet,
+} from 'react-native';
+
+import {
+  Page,
+  Heading,
+  PrimaryButton,
+  COLORS,
+} from '../components/ShopUI';
 
 export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState('');
@@ -11,16 +23,29 @@ export default function LoginScreen({ navigation }: any) {
       Alert.alert('Ескерту', 'Барлық жолды толтырыңыз');
       return;
     }
-    navigation.replace('Home');
+
+    navigation.replace('MainTabs');
   };
 
   return (
     <Page>
-      <Text style={s.back} onPress={() => navigation.goBack()}>← Артқа</Text>
-      <Heading>Қош келдіңіз!</Heading>
-      <Text style={s.info}>Аккаунтыңызға кіріңіз</Text>
+      <Text
+        style={s.back}
+        onPress={() => navigation.goBack()}
+      >
+        ← Артқа
+      </Text>
 
-      <Text style={s.label}>Электрондық пошта</Text>
+      <Heading>Қош келдіңіз!</Heading>
+
+      <Text style={s.info}>
+        Аккаунтыңызға кіріңіз
+      </Text>
+
+      <Text style={s.label}>
+        Электрондық пошта
+      </Text>
+
       <TextInput
         style={s.input}
         placeholder="example@mail.com"
@@ -30,10 +55,13 @@ export default function LoginScreen({ navigation }: any) {
         autoCapitalize="none"
       />
 
-      <Text style={s.label}>Құпиясөз</Text>
+      <Text style={s.label}>
+        Құпиясөз
+      </Text>
+
       <TextInput
         style={s.input}
-        placeholder="Құпиясөзіңіз"
+        placeholder="Құпиясөз"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
@@ -46,31 +74,51 @@ export default function LoginScreen({ navigation }: any) {
         Құпиясөзді ұмыттыңыз ба?
       </Text>
 
-      <PrimaryButton title="Кіру" onPress={login} />
+      <PrimaryButton
+        title="Кіру"
+        onPress={login}
+      />
 
-      <Text style={s.bottom}>
-        Аккаунтыңыз жоқ па?{' '}
-        <Text style={s.green} onPress={() => navigation.navigate('Signup')}>
-          Тіркелу
-        </Text>
+      <Text
+        style={s.bottom}
+        onPress={() => navigation.navigate('Signup')}
+      >
+        Аккаунтыңыз жоқ па? Тіркелу
       </Text>
     </Page>
   );
 }
 
 const s = StyleSheet.create({
-  back: { color: COLORS.green, marginBottom: 35 },
-  info: { color: COLORS.gray, marginBottom: 25 },
-  label: { fontWeight: '600', color: COLORS.dark, marginBottom: 8, marginTop: 15 },
+  back: {
+    color: COLORS.green,
+    marginBottom: 35,
+  },
+  info: {
+    color: COLORS.gray,
+    marginBottom: 20,
+  },
+  label: {
+    fontWeight: '600',
+    color: COLORS.dark,
+    marginTop: 15,
+    marginBottom: 8,
+  },
   input: {
     backgroundColor: COLORS.white,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderRadius: 12,
     padding: 15,
-    fontSize: 15,
   },
-  forgot: { color: COLORS.green, textAlign: 'right', marginTop: 15 },
-  bottom: { textAlign: 'center', marginTop: 25, color: COLORS.gray },
-  green: { color: COLORS.green, fontWeight: 'bold' },
+  forgot: {
+    color: COLORS.green,
+    textAlign: 'right',
+    marginTop: 15,
+  },
+  bottom: {
+    color: COLORS.green,
+    textAlign: 'center',
+    marginTop: 25,
+  },
 });

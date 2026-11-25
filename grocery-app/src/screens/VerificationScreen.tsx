@@ -24,29 +24,34 @@ export default function VerificationScreen({
 
   const { setUser } = useShop();
 
-  const email = route.params?.email || '';
-  const name = route.params?.name || '';
-
   const verify = () => {
     if (code.trim().length < 4) {
-      Alert.alert('Ескерту', 'Растау кодын енгізіңіз');
+      Alert.alert(
+        'Ескерту',
+        'Растау кодын енгізіңіз'
+      );
       return;
     }
 
-    if (!name.trim()) {
-      Alert.alert('Қате', 'Аты-жөн табылмады. Қайта тіркеліңіз.');
+    const name = route.params?.name || '';
+    const email = route.params?.email || '';
+
+    if (!name || !email) {
+      Alert.alert(
+        'Қате',
+        'Тіркелу мәліметтері табылмады'
+      );
       return;
     }
 
-    // Қолданушы мәліметтерін сақтау
     setUser(name, email);
 
     Alert.alert(
       'Дайын',
-      'Тіркелу сәтті аяқталды!'
+      'Тіркелу аяқталды!'
     );
 
-    navigation.replace('Home');
+    navigation.replace('MainTabs');
   };
 
   return (
@@ -61,8 +66,8 @@ export default function VerificationScreen({
       <Heading>Растау</Heading>
 
       <Text style={s.info}>
-        {email || 'Электрондық поштаңыз'} мекенжайына
-        келген кодты енгізіңіз.
+        {route.params?.email || 'Электрондық поштаңыз'}
+        {' '}мекенжайына келген кодты енгізіңіз.
       </Text>
 
       <TextInput
